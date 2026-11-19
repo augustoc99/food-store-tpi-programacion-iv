@@ -4,10 +4,10 @@ Aplicación web para administrar un negocio de comidas: catálogo, usuarios, car
 
 ## 1. Enlaces de la entrega
 
-- **Repositorio público de GitHub:** PENDIENTE DE INCORPORAR — completar después de publicarlo.
-- **Video de demostración (10 a 15 minutos):** PENDIENTE DE INCORPORAR — completar después de grabarlo y publicarlo.
+- **Repositorio público de GitHub:** https://github.com/augustoc99/food-store-tpi-programacion-iv
+- **Video de demostración (10 a 15 minutos):** PENDIENTE — incorporar URL pública después de grabar y publicar el video.
 
-**Importante:** los enlaces anteriores deben reemplazarse por URLs reales y públicas **antes de realizar la entrega definitiva**. El video se comparte exclusivamente por enlace: **no se incluye un archivo `.mp4` dentro del ZIP**.
+**Importante:** el enlace del video debe reemplazarse por una URL real y pública **antes de realizar la entrega definitiva**. El video se comparte exclusivamente por enlace: **no se incluye un archivo `.mp4` dentro del ZIP**.
 
 ## 2. Tecnologías y requisitos
 
@@ -19,7 +19,7 @@ Aplicación web para administrar un negocio de comidas: catálogo, usuarios, car
 | psycopg2-binary | 2.9.11 |
 | Autenticación | JWT con `python-jose`, cookies HttpOnly y bcrypt |
 | Node.js | 20.19 o superior |
-| pnpm | 9.15.9 |
+| pnpm | 9 o superior (probado con 10.33.0) |
 | React / React Router DOM | 19 / 7 |
 | TypeScript / Vite / Tailwind CSS | 5.9 / 7 / 4 |
 | TanStack Query / Form / Table | 5 / 1 / 8 |
@@ -80,7 +80,7 @@ Abrir una terminal en la carpeta `backend/`, crear un entorno virtual e instalar
 python -m venv .venv
 ```
 
-Activar el entorno: en **PowerShell**, `\.venv\Scripts\Activate.ps1`; en **Linux/macOS**, `source .venv/bin/activate`.
+Activar el entorno: en **PowerShell**, `.\.venv\Scripts\Activate.ps1`; en **Linux/macOS**, `source .venv/bin/activate`.
 
 ```bash
 pip install -r requirements.txt
@@ -124,7 +124,7 @@ Cambiar estas credenciales si se expone la aplicación públicamente.
 
 ## 5. Configurar y ejecutar el frontend
 
-Abrir **otra terminal** en `frontend/`. Requiere Node.js compatible y pnpm 9. Si pnpm no está disponible, habilitar Corepack con `corepack enable` y preparar la versión con `corepack prepare pnpm@9.15.9 --activate`.
+Abrir **otra terminal** en `frontend/`. Requiere Node.js 20.19 o superior y pnpm 9 o superior. En Windows se verificó el proyecto con Node.js 24.15.0 y pnpm 10.33.0.
 
 Copiar `frontend/.env.example` como `frontend/.env` y configurar:
 
@@ -185,22 +185,13 @@ No ejecutar pruebas sobre una base con información importante. Se recomienda re
 
 **Frontend:** ejecutar `pnpm install`, `pnpm build` y `pnpm dev` sin errores y verificar manualmente registro, login, carrito, compra, cancelación con restitución de stock y todas las pantallas administrativas.
 
-**Estado de verificación:** el código fue revisado estáticamente, pero no se ha confirmado en este entorno la instalación de dependencias, la ejecución integral de los servicios ni la compilación final con pnpm. Se deben completar esas comprobaciones en una computadora con las dependencias necesarias antes de entregar.
+**Estado de verificación (19/11/2026):** se comprobó en Windows la instalación de dependencias, el arranque de FastAPI y Swagger, `pnpm build` (213 módulos transformados), el funcionamiento manual de catálogo, login, checkout, pedidos y panel administrativo. Se ejecutó `python -m pytest -q` con resultado **6 passed, 1 warning**. Según las pruebas manuales realizadas, el proyecto también funcionó con PostgreSQL 17. Estas comprobaciones no sustituyen una auditoría exhaustiva de todas las combinaciones de errores, permisos y concurrencia.
 
 ## 8. Publicación en GitHub y entrega
 
-Crear un **repositorio público vacío** en GitHub, sin agregar un README ni un `.gitignore` desde la web porque este proyecto ya los contiene. Desde la carpeta raíz del proyecto (donde está este archivo), ejecutar:
+**Repositorio:** https://github.com/augustoc99/food-store-tpi-programacion-iv
 
-```bash
-git init
-git add .
-git commit -m "Entrega TPI Food Store"
-git branch -M main
-git remote add origin https://github.com/TU_USUARIO/NOMBRE_DEL_REPOSITORIO.git
-git push -u origin main
-```
-
-Reemplazar `TU_USUARIO` y `NOMBRE_DEL_REPOSITORIO` por los valores reales. GitHub puede solicitar autenticación para publicar. No añadir archivos `.env`, bases de datos, `.venv`, `node_modules` ni datos confidenciales.
+El código se mantiene en un repositorio público de GitHub. Para publicar nuevas correcciones desde una copia local vinculada al repositorio, utilizar `git add`, `git commit` y `git push` después de revisar `git status`. No añadir archivos `.env`, bases de datos, `.venv`, `node_modules` ni datos confidenciales.
 
 **Antes de entregar:** actualizar los dos enlaces de la sección 1, subir el README actualizado al repositorio y comprimir únicamente los archivos del proyecto, con `backend/`, `frontend/` y `README.md` en la raíz (sin `.git`, `.env`, `venv`, `node_modules` ni `.mp4`). La entrega se realiza en un solo ZIP en el aula virtual.
 
