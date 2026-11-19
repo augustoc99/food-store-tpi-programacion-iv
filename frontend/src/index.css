@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-ink: #20312d;
+  --color-evergreen: #174f43;
+  --color-fern: #317966;
+  --color-canvas: #f6f8f5;
+  --color-mist: #e8eee9;
+}
+
+html, body, #root { min-height: 100%; }
+body { margin: 0; min-width: 320px; font-family: system-ui, sans-serif; background: #f6f8f5; color: #20312d; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+
+@layer components {
+  .panel { @apply rounded-2xl border border-gray-200 bg-white shadow-sm; }
+  .btn-primary { @apply rounded-xl bg-evergreen px-4 py-2.5 text-sm font-semibold text-white hover:bg-fern disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2; }
+  .btn-secondary { @apply rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink hover:bg-gray-50 disabled:opacity-50; }
+  .field { @apply w-full rounded-xl border border-gray-300 bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-fern focus:ring-2 focus:ring-green-100; }
+  .etiqueta { @apply mb-1 block text-sm font-medium text-ink; }
+}
+
+.dark {
+  --color-ink: #e2e8f0;
+  --color-canvas: #0f172a;
+}
+.dark body { background: #0f172a; color: #e2e8f0; }
+.dark .panel { background: #1e293b; border-color: #334155; color: #f8fafc; }
+.dark .field { background: #0f172a; border-color: #475569; color: #f8fafc; }
+.dark .btn-secondary { background: #334155; border-color: #475569; color: #f8fafc; }
+.dark .text-gray-600, .dark .text-gray-500 { color: #cbd5e1 !important; }
+.dark .bg-white { background-color: #1e293b !important; }
+.dark .bg-gray-50, .dark .bg-gray-100 { background-color: #334155 !important; }
+.dark .border-gray-100, .dark .border-gray-200, .dark .border-gray-300 { border-color: #475569 !important; }
+.dark tr:hover { background-color: #334155; }
+.dark .etiqueta { color: #e2e8f0; }
+
+@layer components { .page-title { @apply mb-5 text-3xl font-extrabold tracking-tight; } .error { @apply mb-3 rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-700; } .skeleton { @apply animate-pulse rounded-2xl bg-mist; } }
