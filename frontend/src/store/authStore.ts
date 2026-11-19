@@ -22,7 +22,9 @@ export const useAuthStore = create<AuthState>()(persist((set) => ({
         const { data } = await api.get<User>('/auth/me');
         set({ user: data, status: 'authenticated', error: null });
       } catch {
-        queryClient.clear();
+        // /auth/me devuelve 401 normalmente para un visitante anónimo.
+        // NO limpiar la caché en el arranque: cancelaba las consultas públicas
+        // del catálogo y dejaba el skeleton hasta recuperar el foco de la pestaña.
         set({ user: null, status: 'unauthenticated' });
       } finally { set({ loading: false }); }
     })();

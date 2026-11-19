@@ -10,12 +10,16 @@ export function CheckoutPage() {
  const clear = useCartStore((s)=>s.vaciar);
  const actions = usePedidoActions();
  const [error,setError] = useState<string|null>(null);
+ const [pedidoConfirmado, setPedidoConfirmado] = useState(false);
  const form = useForm({ defaultValues: {direccion_entrega:'',forma_pago:'EFECTIVO' as Pago,notas:''},
    onSubmit: async ({value}) => { setError(null); try {
      await actions.create.mutateAsync({items:items.map(i=>({producto_id:i.producto_id,cantidad:i.cantidad})),
        direccion_entrega:value.direccion_entrega.trim(),forma_pago:value.forma_pago,notas:value.notas});
-     clear(); navigate('/mis-pedidos');
+     setPedidoConfirmado(true);
+     navigate('/mis-pedidos', { replace: true });
+     clear();
    } catch(e) {setError((e as Error).message);} } });
+ if(pedidoConfirmado || actions.create.isSuccess) return <Navigate to="/mis-pedidos" replace/>;
  if(items.length===0) return <Navigate to="/carrito" replace/>;
  return <section className="mx-auto max-w-lg"><h1 className="page-title">Confirmar pedido</h1><div className="panel p-6"><form className="space-y-5" onSubmit={e=>{e.preventDefault();void form.handleSubmit();}}>
   <form.Field name="direccion_entrega" validators={{onBlur:({value})=>value.trim().length<5?'Ingresá una dirección válida (mínimo 5 caracteres)':undefined}}>{field=><label className="etiqueta">Dirección de entrega *<input className="field mt-1" minLength={5} maxLength={200} required value={field.state.value} onChange={e=>field.handleChange(e.target.value)} onBlur={field.handleBlur}/>{field.state.meta.errors.map((e,i)=><span className="error" key={i}>{String(e)}</span>)}</label>}</form.Field>

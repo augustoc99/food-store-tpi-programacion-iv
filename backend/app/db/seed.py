@@ -8,19 +8,19 @@ from app.modules.productos.models import Producto
 
 CATALOGO = {
     'Hamburguesas': [
-        ('Hamburguesa clásica', 'Carne, lechuga, tomate y queso', 8900, 20),
-        ('Hamburguesa doble', 'Doble carne y cheddar', 11900, 15),
-        ('Hamburguesa veggie', 'Medallón de legumbres', 9200, 10),
+        ('Hamburguesa clásica', 'Carne, lechuga, tomate y queso', 8900, 20, '/images/hamburguesa-clasica.webp'),
+        ('Hamburguesa doble', 'Doble carne y cheddar', 11900, 15, '/images/hamburguesa-doble.webp'),
+        ('Hamburguesa veggie', 'Medallón de legumbres', 9200, 10, '/images/hamburguesa-veggie.webp'),
     ],
     'Pizzas': [
-        ('Pizza muzzarella', 'Salsa de tomate y muzzarella', 13200, 12),
-        ('Pizza napolitana', 'Tomate fresco y ajo', 14900, 14),
-        ('Pizza especial', 'Jamón, morrones y queso', 15900, 11),
+        ('Pizza muzzarella', 'Salsa de tomate y muzzarella', 13200, 12, '/images/pizza-muzzarella.webp'),
+        ('Pizza napolitana', 'Tomate fresco y ajo', 14900, 14, '/images/pizza-napolitana.webp'),
+        ('Pizza especial', 'Jamón, morrones y queso', 15900, 11, '/images/pizza-especial.webp'),
     ],
     'Bebidas': [
-        ('Limonada', 'Limonada natural', 3200, 35),
-        ('Agua mineral', 'Botella de agua sin gas', 2300, 60),
-        ('Gaseosa', 'Gaseosa individual', 2900, 40),
+        ('Limonada', 'Limonada natural', 3200, 35, '/images/limonada.webp'),
+        ('Agua mineral', 'Botella de agua sin gas', 2300, 60, '/images/agua-mineral.webp'),
+        ('Gaseosa', 'Gaseosa individual', 2900, 40, '/images/gaseosa.webp'),
     ],
 }
 
@@ -37,13 +37,16 @@ def seed():
                 cat = Categoria(nombre=cat_name, descripcion=f'Productos de {cat_name.lower()}')
                 db.add(cat)
                 db.flush()
-            for name, description, price, stock in products:
+            for name, description, price, stock, imagen in products:
                 exists = db.exec(select(Producto).where(Producto.nombre == name, Producto.categoria_id == cat.id)).first()
                 if not exists:
                     db.add(Producto(categoria_id=cat.id, nombre=name, descripcion=description,
-                                   precio_base=price, stock=stock, disponible=True))
+                                   precio_base=price, stock=stock, disponible=True, imagen_url=imagen))
+                elif not exists.imagen_url:
+                    # Solo completa datos antiguos; no pisa fotos que haya configurado el administrador.
+                    exists.imagen_url = imagen
         db.commit()
-    print('Seed finalizado: admin y catálogo (sin duplicados)')
+    print('Seed finalizado: admin, catálogo e imágenes (sin duplicados)')
 
 if __name__ == '__main__':
     seed()
