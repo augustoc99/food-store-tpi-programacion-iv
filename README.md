@@ -5,9 +5,8 @@ Aplicación web para administrar un negocio de comidas: catálogo, usuarios, car
 ## 1. Enlaces de la entrega
 
 - **Repositorio público de GitHub:** https://github.com/augustoc99/food-store-tpi-programacion-iv
-- **Video de demostración (10 a 15 minutos):** PENDIENTE — incorporar URL pública después de grabar y publicar el video.
+- **Video de demostración:** https://drive.google.com/file/d/1DCvgKJsVGW--twNxV3H3HX1Ao4h43Xcv/view?usp=drive_link
 
-**Importante:** el enlace del video debe reemplazarse por una URL real y pública **antes de realizar la entrega definitiva**. El video se comparte exclusivamente por enlace: **no se incluye un archivo `.mp4` dentro del ZIP**.
 
 ## 2. Tecnologías y requisitos
 
@@ -187,18 +186,13 @@ No ejecutar pruebas sobre una base con información importante. Se recomienda re
 
 **Estado de verificación (19/11/2026):** se comprobó en Windows la instalación de dependencias, el arranque de FastAPI y Swagger, `pnpm build` (213 módulos transformados), el funcionamiento manual de catálogo, login, checkout, pedidos y panel administrativo. Se ejecutó `python -m pytest -q` con resultado **6 passed, 1 warning**. Según las pruebas manuales realizadas, el proyecto también funcionó con PostgreSQL 17. Estas comprobaciones no sustituyen una auditoría exhaustiva de todas las combinaciones de errores, permisos y concurrencia.
 
-## 8. Publicación en GitHub y entrega
+## 8. Publicación en GitHub
 
 **Repositorio:** https://github.com/augustoc99/food-store-tpi-programacion-iv
 
-El código se mantiene en un repositorio público de GitHub. Para publicar nuevas correcciones desde una copia local vinculada al repositorio, utilizar `git add`, `git commit` y `git push` después de revisar `git status`. No añadir archivos `.env`, bases de datos, `.venv`, `node_modules` ni datos confidenciales.
-
-**Antes de entregar:** actualizar los dos enlaces de la sección 1, subir el README actualizado al repositorio y comprimir únicamente los archivos del proyecto, con `backend/`, `frontend/` y `README.md` en la raíz (sin `.git`, `.env`, `venv`, `node_modules` ni `.mp4`). La entrega se realiza en un solo ZIP en el aula virtual.
 
 **Fecha límite:** 24 de noviembre de 2026, 23:59.
 
-## 9. Video demostrativo (pendiente, última etapa)
+## 9. Video de explicación y demostración
 
-El video debe durar entre **10 y 15 minutos** y tener enlace público en la sección 1 de este README. Debe incluir presentación con **cámara encendida al inicio**, registro, login, compra como cliente, gestión del negocio como administrador y cancelación de un pedido con prueba de restitución de stock. Preparar pedidos separados para mostrar entrega y cancelación: un pedido `ENTREGADO` no puede cancelarse.
-
-El video no se incluye en el ZIP; publicar solamente su enlace.
+https://drive.google.com/file/d/1DCvgKJsVGW--twNxV3H3HX1Ao4h43Xcv/view?usp=drive_link
